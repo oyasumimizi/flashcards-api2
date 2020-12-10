@@ -1,0 +1,17 @@
+body{
+    background-color: #8DA6C7;
+}
+  
+font{
+      color:black;
+}
+
+h1{
+    width: 100px;
+    height: 100px;
+    background: white;
+}
+
+.boxshadow{
+    box-shadow: 2px 2px 5px grey;
+}
