@@ -12,14 +12,14 @@ class CardCollection extends Component{
 this.handleChange = this.handleChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
 
-handleChange(event){
+handleChange(e){
     this.setState({
-        [event.target.name]: event.target.value
+        [e.target.name]: e.target.value
     });
 }
 
-handleSubmit(event){
-    event.preventDefault();
+handleSubmit(e){
+    e.preventDefault();
     const flashcard = {
         title: this.state.title,
     }
@@ -40,6 +40,16 @@ handleSubmit(event){
                    <div className="row col-allign">
                        <label>Title:</label>
                        <input type ="text" name="title" value={this.state.title}
+                       onChange={this.handleChange}/>
+                   </div>
+                   <div className="row col-allign">
+                   <label>Word:</label>
+                       <input type="text" name="word" value={this.state.word}
+                       onChange={this.handleChange}/>
+                   </div>
+                   <div className="row col-allign">
+                       <label>Description:</label>
+                       <input type="text" name="description" value={this.state.description}
                        onChange={this.handleChange}/>
                    </div>
                    <div className="cold-md-4">
