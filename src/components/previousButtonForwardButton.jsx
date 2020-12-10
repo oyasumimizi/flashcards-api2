@@ -3,7 +3,7 @@ import React from 'react'
 function CardPosition(props){
     return (
             <div className="container-fluid">
-                 <TitleBar />
+                 <cardFlip />
                  <div className="row row-spacer">
                  <div className="col-md-4">
                  {button onClick={() => props.previousCard()}>Previous Card</button>
