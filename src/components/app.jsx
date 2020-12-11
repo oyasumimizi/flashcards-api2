@@ -22,6 +22,10 @@ class App extends Component{
         }
     }
 
+    axios = require('axios').default;
+
+
+
     addNewCard(flashCards){
         this.flashCards.push(flashCards);
         this.setState({
@@ -32,8 +36,9 @@ class App extends Component{
     
     goToNextFlashCard(){
         let tempFlashCardsNumber = this.state.flashCardsNumber;
-        tempFlashCardsNumber++;
-        if(tempFlashCardsNumber === this.flashCards.length{
+        let collectionLength = this.state.collection.length;
+        tempFlashCardsNumber++
+        if(tempFlashCardsNumber === collectionLength) {
             tempFlashCardsNumber = 0;
         }
         this.setState({
@@ -43,11 +48,15 @@ class App extends Component{
 
     goToPreviousFlashCard(){
         let tempFlashCardsNumber = this.state.flashCardsNumber;
-        tempFlashCardsNumber--;
-        if(tempFlashCardsNumber < 0)
-            tempFlashCardsNumber = this.flashCards.length -1;
+        let collectionLength = this.state.collection.length;
+        tempFlashCardsNumber--
+        if(tempFlashCardsNumber < 0){
+            tempFlashCardsNumber = collectionLength -1;
+            
         this.setState({
             flashCardsNumber: tempFlashCardsNumber
+
+            
         });
     }
 
