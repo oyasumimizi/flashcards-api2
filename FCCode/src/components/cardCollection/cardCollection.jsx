@@ -1,13 +1,40 @@
 import React from 'react';
+import axios from 'axios';
 
 import React {Component} from 'react';
 
-class CardCollection extends Component{
+class CardCollection extends React.Component {
     constructor(props){
         super(props);
-        this.state={ }
+        this.state={ 
+            collections: [],
+            loading: true
+        }
             title= "",
     }
+    axios = require('axios').default;
+
+    componentDidMount() { 
+        axios.get('')
+        .then(res => {
+            const collections = res.data;
+            this.setState({
+                collections:: collections,
+                loading: false
+        });
+    }
+
+    render() {
+        return ( this.state.loading ? <tr><td>Loading...</td></tr>) :
+        <ul>
+        {/* {this.state.music[0].title} */}
+        {this.state.collections.map(card => <li>{card.title}</li>)}
+        </ul>
+        )
+    }
+    }
+
+    export default Collection
 
 this.handleChange = this.handleChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
