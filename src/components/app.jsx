@@ -1,6 +1,6 @@
 import React from 'react';
 import CardCollection from './cardCollection/cardCollection';
-import FlashCards from './flashCards/flashCards';
+import FlashCards from './flashCards/flashCards.JSX';
 import CardPosition from './previousButtonForwardButton';
 
 
@@ -22,6 +22,29 @@ class App extends Component{
         }
     }
 
+class Card extends render() {
+    return (
+        <div> 
+        { this.props.value }
+        </div>
+    );
+}
+}
+
+class CardContainer extends React.Component {   
+    render() {
+    let arr=["one", "two", "three", "four", "five"];
+    let elements=[];
+    for(let i=0; i<arr.length; i++){
+        elements.push(<Card value={ arr[i] } />);
+    }
+        return (
+        <div> 
+        {elements}
+        </div>
+    );
+}
+}
     addNewCard(flashCards){
         this.flashCards.push(flashCards);
         this.setState({
