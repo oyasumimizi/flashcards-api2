@@ -4,7 +4,7 @@ import FlashCards from './flashCards/flashCards';
 import CardPosition from './previousButtonForwardButton';
 
 
-class App extends Component{
+class App extends React.Component {
     constructor(props){
         super(props);
         this.FlashCards = [
@@ -48,7 +48,7 @@ class App extends Component{
 
     goToPreviousFlashCard(){
         let tempFlashCardsNumber = this.state.flashCardsNumber;
-        let collectionLength = this.state.collection.length;
+        let flashCardsLength = this.state.flashCardsLength.length;
         tempFlashCardsNumber--
         if(tempFlashCardsNumber < 0){
             tempFlashCardsNumber = collectionLength -1;
@@ -61,9 +61,16 @@ class App extends Component{
     }
 
     render = (){
-        return (
-           <div className="container-fluid">
-                <CardPosition flashCards={this.flashCards[this.state.flashCardsNumber]} nextCard={() => this.goToNextFlashCard()} previousCard={() => this.goToPreviousFlashCard()}/>)
+        console.log('collections: ', this.state.collections[this.state.collectionNumber])
+        console.log('loading: ', this.state.loading)
+        return (this.state.loading ? <h1>Loading...</h1>:
+           <div>
+               <FlashCard
+               collections = {this.collections}
+               collection = {this.state.collections[this.state.collectionNumber]}
+
+                CardPosition flashCards={this.flashCards[this.state.flashCardsNumber]} nextCard={() => this.goToNextFlashCard()} 
+                previousFlashCard={() => this.goToPreviousFlashCard()} />)
                 <CardCollection addNewCardCollection={this.addNewCardCollection.bind(this)}/>
             </div>
 
