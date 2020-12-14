@@ -1,13 +1,17 @@
-import React from 'react';
-
 import React {Component} from 'react';
-
+import Axios from 'axios';
 class CardCollection extends Component{
     constructor(props){
         super(props);
         this.state={ }
             title= "",
     }
+
+    componentDidMount() {
+        axios.get(`https://jsonplaceholder.typicode.com/users`)
+          .then(res => {
+            const persons = res.data;
+            this.setState({ persons });
 
 this.handleChange = this.handleChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
