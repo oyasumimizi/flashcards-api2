@@ -1,7 +1,15 @@
 import React from 'react';
-import CardCollection from './cardCollection';
+// import CardCollection from './cardCollection';
 import FlashCards from './flashCards';
-import CardPosition from './previousButtonForwardButton';
+// import CardPosition from './previousButtonForwardButton';
+
+componentDidMount() {
+    axios.get(`http://localhost:5000/api/collections`)
+      .then(res => {
+        console.log(res);
+      }
+}
+
 
 
 class App extends React.Component {
@@ -21,66 +29,61 @@ class App extends React.Component {
             flashCardsNumber:0
         }
     }
+
 //make methods that make api calls
 
-    // axios = require('axios').default;
 
-
-
-    // addNewCard(flashCards){
-    //     this.flashCards.push(flashCards);
-    //     this.setState({
-    //         flashCardsNumber: this.flashCards.length - 1
-    //     });
-    // }
+    addNewCard(flashCards){
+        this.flashCards.push(flashCards);
+        this.setState({
+            flashCardsNumber: this.flashCards.length - 1
+        });
+    }
 
     
-    // goToNextFlashCard(){
-    //     let tempFlashCardsNumber = this.state.flashCardsNumber;
-    //     let collectionLength = this.state.collection.length;
-    //     tempFlashCardsNumber++
-    //     if(tempFlashCardsNumber === collectionLength) {
-    //         tempFlashCardsNumber = 0;
-    //     }
-    //     this.setState({
-    //         flashCardsNumber: tempFlashCardsNumber
-    //     });
-    // }
+    goToNextFlashCard(){
+        let tempFlashCardsNumber = this.state.flashCardsNumber;
+        let collectionLength = this.state.collection.length;
+        tempFlashCardsNumber++
+        if(tempFlashCardsNumber === collectionLength) {
+            tempFlashCardsNumber = 0;
+        }
+        this.setState({
+            flashCardsNumber: tempFlashCardsNumber
+        });
+    }
 
-    // goToPreviousFlashCard(){
-    //     let tempFlashCardsNumber = this.state.flashCardsNumber;
-    //     let flashCardsLength = this.state.flashCardsLength.length;
-    //     collectionLength--
-    //     if(tempFlashCardsNumber < 0){
-    //         tempFlashCardsNumber = collectionLength -1;
+    goToPreviousFlashCard(){
+        let tempFlashCardsNumber = this.state.flashCardsNumber;
+        let flashCardsLength = this.state.flashCardsLength.length;
+        collectionLength--
+        if(tempFlashCardsNumber < 0){
+            tempFlashCardsNumber = collectionLength -1;
             
-    //     this.setState({
-    //         flashCardsNumber: tempFlashCardsNumber
+        this.setState({
+            flashCardsNumber: tempFlashCardsNumber
 
             
-    //      });
-    //     }
-    // }
+         });
+        }
+    }
 
     render(){
-        // console.log(['collections: '], this.state.collections[this.state.collectionNumber])
+        console.log(['collections: '], this.state.collections[this.state.collectionNumber])
         console.log({loading: this.state.loading}); 
         return (this.state.loading ? <h1>Loading...</h1>:
            <div>
 //                <FlashCards
-//                collections = {this.collections}
-//                collection = {this.state.collections[this.state.collectionNumber]}/>
+               collections = {this.collections}
+               collection = {this.state.collections[this.state.collectionNumber]}/>
 
-//                 {/* CardPosition flashCards={this.flashCards[this.state.flashCardsNumber]} nextCard={() => this.goToNextFlashCard()}  */}
-//                 {/* previousFlashCard={() => this.goToPreviousFlashCard()} />) */}
-//                 <CardCollection addNewCardCollection={this.addNewCardCollection.bind(this)}/>
-//             </div>
+                CardPosition flashCards={this.flashCards[this.state.flashCardsNumber]} nextCard={() => this.goToNextFlashCard()} 
+                previousFlashCard={() => this.goToPreviousFlashCard()} />)
+                <CardCollection addNewCardCollection={this.addNewCardCollection.bind(this)}/>
+            </div>
 
-//         );
-//     }
-// }
+        );
+    }
+}
 
 export default App;
-//get data in
-// return loading 
-// when data shows is present add child components
