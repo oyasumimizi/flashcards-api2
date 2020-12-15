@@ -1,21 +1,24 @@
-import React {Component} from 'react';
-import Axios from 'axios';
+import React, {Component} from 'react';
+import axios from 'axios';
+
+
 class CardCollection extends Component{
     constructor(props){
         super(props);
-        this.state={ }
-            title= "",
+        this.state={title: "",
     }
+    }
+    
 
     componentDidMount() {
-        axios.get(`https://jsonplaceholder.typicode.com/users`)
+        axios.get(`http://localhost:5000/api/collections`)
           .then(res => {
-            const persons = res.data;
-            this.setState({ persons });
-
+              console.log(res);
+              this.setState({ getCardData: res.data });
+ });
 this.handleChange = this.handleChange.bind(this);
 this.handleSubmit = this.handleSubmit.bind(this);
-
+ }
 handleChange(e){
     this.setState({
         [e.target.name]: e.target.value
@@ -59,10 +62,10 @@ handleSubmit(e){
                    <div className="cold-md-4">
                        <input type="submit" value="Add"/>
                    </div>
-                <div>
             </form>
         </div>
     );
+}
 }
 
 

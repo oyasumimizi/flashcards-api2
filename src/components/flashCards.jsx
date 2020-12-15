@@ -7,8 +7,8 @@ function FlashCards(props){
                 <h2 className= "word">{props.flashcards.word}</h2>
                 <h3 className= "description">{props.flashcards.description}</h3>
             </div>
-        </div>
     );
-)
+ }
+
 
 export default FlashCards;
