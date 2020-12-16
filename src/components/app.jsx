@@ -1,35 +1,40 @@
-import React from 'react';
-// import CardCollection from './cardCollection';
+import Axios from 'axios';
+import React, {Component} from 'react';
+import CardCollection from './cardCollection';
 import FlashCards from './flashCards';
 // import CardPosition from './previousButtonForwardButton';
 
-componentDidMount() {
-    axios.get(`http://localhost:5000/api/collections`)
-      .then(res => {
-        console.log(res);
-      }
-}
-
-
+//get componentDidMount back in the component, grab data and set it into state variable, also flip loading
 
 class App extends React.Component {
     constructor(props){
         super(props);
-        this.FlashCards = [
-            {title: "React"},
-            {word: "state", definition: "JS object that holds values for a component"},
-            {word: "props", definition: "A way to pass data into components on initialization"},
-            {word: "component", definition: "Reusable building blocks for UI using JSX"},
-            {title: "C#"},
-            {word: "variable", definition: "Named space in memory"},
-            {word: "class", definition: "Template for an object that consists of member variables, constructor, methods"},
-            {word: "object", definition: "Instance of a class"}
-        ];
         this.state = {
-            flashCardsNumber:0
+            loading: true,
+            flashCardsNumber:0,
+            collection:0,
+            collectionNumber:0,
+            collections:[
+                {title: "React"},
+                {word: "state", definition: "JS object that holds values for a component"},
+                {word: "props", definition: "A way to pass data into components on initialization"},
+                {word: "component", definition: "Reusable building blocks for UI using JSX"},
+                {title: "C#"},
+                {word: "variable", definition: "Named space in memory"},
+                {word: "class", definition: "Template for an object that consists of member variables, constructor, methods"},
+                {word: "object", definition: "Instance of a class"}]
         }
     }
 
+
+    componentDidMount(){
+        Axios.get('http://localhost:5000/api/collections')
+        .then(res => ){
+            console.log(flashCards);
+            this.setState({ flashCards });
+            this.setState({ loading: false })
+        }
+    }
 //make methods that make api calls
 
 
@@ -55,7 +60,7 @@ class App extends React.Component {
 
     goToPreviousFlashCard(){
         let tempFlashCardsNumber = this.state.flashCardsNumber;
-        let flashCardsLength = this.state.flashCardsLength.length;
+        let collectionLength = this.state.collection.length;
         collectionLength--
         if(tempFlashCardsNumber < 0){
             tempFlashCardsNumber = collectionLength -1;
@@ -69,17 +74,21 @@ class App extends React.Component {
     }
 
     render(){
-        console.log(['collections: '], this.state.collections[this.state.collectionNumber])
+
+        console.log(['collection: '], this.state.collection[this.state.collectionNumber])
         console.log({loading: this.state.loading}); 
-        return (this.state.loading ? <h1>Loading...</h1>:
+        return (this.state.loading ? <h1>ReactLoading type={"bars"} color={"white"}</h1>:
+        
+           
            <div>
-//                <FlashCards
+               {console.log(this.state.collections)}
+               <FlashCards
                collections = {this.collections}
                collection = {this.state.collections[this.state.collectionNumber]}/>
 
                 CardPosition flashCards={this.flashCards[this.state.flashCardsNumber]} nextCard={() => this.goToNextFlashCard()} 
                 previousFlashCard={() => this.goToPreviousFlashCard()} />)
-                <CardCollection addNewCardCollection={this.addNewCardCollection.bind(this)}/>
+                <cardCollection addNewCardCollection={this.addNewCardCollection.bind(this)}/>
             </div>
 
         );
